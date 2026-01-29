@@ -133,7 +133,7 @@ namespace Calculator
         }
 
         private void button3_Click(object sender, EventArgs e)
-        {
+        {  
             if (!clearEqual)
             {
                 output.ForeColor = Color.White;
@@ -263,13 +263,29 @@ namespace Calculator
             return !string.IsNullOrWhiteSpace(output.Text);
         }
 
+        private string bigNumConvert(string expression)
+        {
+            if (BigInteger.TryParse(expression, out BigInteger number))
+            {
+                if (number.ToString().Length > 16)
+                {
+                    double d = (double)number;
+                    return d.ToString("E");
+                }
+            }
+
+            return expression;
+        }
+
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            string bigNum = bigNumConvert(output.Text);
+
             if (!addOperation()) return;
 
             RemoveEndZeroDeci();
 
-            if (double.TryParse(output.Text, out double number))
+            if (double.TryParse(bigNum, out double number))
             {
                 All = AllOps.Text + output.Text;
                 output.Text = "";
@@ -288,11 +304,13 @@ namespace Calculator
 
         private void buttonSub_Click(object sender, EventArgs e)
         {
+            string bigNum = bigNumConvert(output.Text);
+
             if (!addOperation()) return;
 
             RemoveEndZeroDeci();
 
-            if (double.TryParse(output.Text, out double number))
+            if (double.TryParse(bigNum, out double number))
             {
                 All = AllOps.Text + output.Text;
                 output.Text = "";
@@ -312,11 +330,13 @@ namespace Calculator
 
         private void buttonMultiply_Click(object sender, EventArgs e)
         {
+            string bigNum = bigNumConvert(output.Text);
+
             if (!addOperation()) return;
 
             RemoveEndZeroDeci();
 
-            if (double.TryParse(output.Text, out double number))
+            if (double.TryParse(bigNum, out double number))
             {
                 All = AllOps.Text + output.Text;
                 output.Text = "";
@@ -336,11 +356,13 @@ namespace Calculator
 
         private void buttonDivide_Click(object sender, EventArgs e)
         {
+            string bigNum = bigNumConvert(output.Text);
+
             if (!addOperation()) return;
 
             RemoveEndZeroDeci();
 
-            if (double.TryParse(output.Text, out double number))
+            if (double.TryParse(bigNum, out double number))
             {
                 All = AllOps.Text + output.Text;
                 output.Text = "";
@@ -356,6 +378,7 @@ namespace Calculator
             }
 
         }
+
 
         private void buttonEqual_Click(object sender, EventArgs e)
         {
@@ -400,6 +423,13 @@ namespace Calculator
                 AllOps.Text = "";
                 RemoveEndZeroDeci();
 
+            }
+            catch (OverflowException)
+            {
+                output.Text = "Exceeds calculation limit";
+                output.ForeColor = Color.Red;
+                AllOps.Text = "";
+                decimalUsed = false;
             }
             catch
             {

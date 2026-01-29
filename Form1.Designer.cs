@@ -55,12 +55,12 @@
             // 
             output.BackColor = Color.FromArgb(64, 64, 64);
             output.BorderStyle = BorderStyle.None;
-            output.Font = new Font("Adobe Gothic Std B", 26.25F, FontStyle.Bold, GraphicsUnit.Point, 128);
+            output.Font = new Font("Adobe Gothic Std B", 21.75F, FontStyle.Bold, GraphicsUnit.Point, 128);
             output.ForeColor = SystemColors.Control;
-            output.Location = new Point(1, 64);
+            output.Location = new Point(1, 79);
             output.Multiline = true;
             output.Name = "output";
-            output.Size = new Size(285, 79);
+            output.Size = new Size(285, 64);
             output.TabIndex = 0;
             output.TextAlign = HorizontalAlignment.Right;
             output.TextChanged += textBox1_TextChanged;
@@ -317,10 +317,10 @@
             AllOps.BorderStyle = BorderStyle.None;
             AllOps.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             AllOps.ForeColor = SystemColors.Control;
-            AllOps.Location = new Point(1, 2);
+            AllOps.Location = new Point(1, 5);
             AllOps.Multiline = true;
             AllOps.Name = "AllOps";
-            AllOps.Size = new Size(285, 56);
+            AllOps.Size = new Size(285, 68);
             AllOps.TabIndex = 19;
             AllOps.TextAlign = HorizontalAlignment.Right;
             // 
@@ -352,7 +352,7 @@
             Controls.Add(button0);
             Controls.Add(output);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Calculator";
             ResumeLayout(false);
             PerformLayout();
         }
